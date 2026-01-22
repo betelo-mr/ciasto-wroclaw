@@ -7,7 +7,7 @@
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
@@ -458,9 +458,9 @@
         // ============================================
         // KONFIGURACJA - UZUPEŁNIJ PONIŻEJ
         // ============================================
-        const SUPABASE_URL = 'https://tkxfzyjtopxphqnevcuj.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRreGZ6eWp0b3B4cGhxbmV2Y3VqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjkxMDcyNzYsImV4cCI6MjA4NDY4MzI3Nn0.F1btQFkcE_6QLc5YjnNTh2yKJ7lq_UD7HfHO6uj0RxM';
-const ADMIN_PASSWORD = 'X@vfIfycIaxmnFv3PsMk_D64W2d1vpJ9gTj_HdQoh_p2IN0cZx94p_ZTuVv#bFu6qpwv@@y7V1EV6%mVuv2viiwSKTrv1Yq';
+        const SUPABASE_URL = 'YOUR_SUPABASE_URL';  // np. 'https://xyzcompany.supabase.co'
+        const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';  // klucz anon/public
+        const ADMIN_PASSWORD = 'ciasto2025';  // <- ZMIEŃ NA WŁASNE HASŁO
         // ============================================
 
         const isConfigured = SUPABASE_URL !== 'YOUR_SUPABASE_URL' && SUPABASE_ANON_KEY !== 'YOUR_SUPABASE_ANON_KEY';
