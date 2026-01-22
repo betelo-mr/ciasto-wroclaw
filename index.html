@@ -460,7 +460,6 @@
         // ============================================
         const SUPABASE_URL = 'YOUR_SUPABASE_URL';  // np. 'https://xyzcompany.supabase.co'
         const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';  // klucz anon/public
-        const ADMIN_PASSWORD = 'ciasto2025';  // <- ZMIEŃ NA WŁASNE HASŁO
         // ============================================
 
         const isConfigured = SUPABASE_URL !== 'YOUR_SUPABASE_URL' && SUPABASE_ANON_KEY !== 'YOUR_SUPABASE_ANON_KEY';
@@ -468,6 +467,29 @@
         let supabase = null;
         if (isConfigured) {
             supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        }
+
+        // Funkcja hashująca hasło (SHA-256)
+        async function hashPassword(password) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(password);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        // Sprawdź hasło z bazą
+        async function verifyPassword(password) {
+            if (!supabase) return false;
+            const hash = await hashPassword(password);
+            const { data, error } = await supabase
+                .from('app_settings')
+                .select('value')
+                .eq('key', 'admin_password_hash')
+                .single();
+            
+            if (error || !data) return false;
+            return data.value === hash;
         }
 
         // Generuj najbliższe niedziele
@@ -503,22 +525,21 @@
             const [error, setError] = React.useState(false);
             const [loading, setLoading] = React.useState(false);
 
-            const handleSubmit = (e) => {
+            const handleSubmit = async (e) => {
                 e.preventDefault();
                 setLoading(true);
                 setError(false);
                 
-                // Małe opóźnienie dla efektu
-                setTimeout(() => {
-                    if (password === ADMIN_PASSWORD) {
-                        localStorage.setItem('cake_auth', 'true');
-                        onLogin();
-                    } else {
-                        setError(true);
-                        setPassword('');
-                    }
-                    setLoading(false);
-                }, 300);
+                const isValid = await verifyPassword(password);
+                
+                if (isValid) {
+                    localStorage.setItem('cake_auth', 'true');
+                    onLogin();
+                } else {
+                    setError(true);
+                    setPassword('');
+                }
+                setLoading(false);
             };
 
             return (
