@@ -4,20 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zapisy na ciasto</title>
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.0/dist/umd/supabase.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --cream: #F7F4EF;
             --warm-brown: #8B7355;
@@ -27,22 +18,16 @@
             --white: #FFFFFF;
             --shadow: rgba(92, 74, 61, 0.08);
         }
-
         body {
             font-family: 'DM Sans', sans-serif;
             background: var(--cream);
             min-height: 100vh;
             color: var(--deep-brown);
         }
-
-        /* Decorative background pattern */
         body::before {
             content: '';
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            top: 0; left: 0; right: 0; bottom: 0;
             background-image: 
                 radial-gradient(circle at 20% 80%, var(--soft-gold) 0%, transparent 50%),
                 radial-gradient(circle at 80% 20%, var(--soft-gold) 0%, transparent 40%);
@@ -50,51 +35,17 @@
             pointer-events: none;
             z-index: -1;
         }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 50px;
-            animation: fadeInDown 0.8s ease-out;
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .header-icon {
-            font-size: 48px;
-            margin-bottom: 16px;
-            display: block;
-        }
-
+        .container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+        .header { text-align: center; margin-bottom: 50px; }
+        .header-icon { font-size: 48px; margin-bottom: 16px; display: block; }
         h1 {
             font-family: 'Cormorant Garamond', serif;
             font-size: 2.8rem;
             font-weight: 500;
             color: var(--deep-brown);
             margin-bottom: 8px;
-            letter-spacing: 0.02em;
         }
-
-        .subtitle {
-            color: var(--warm-brown);
-            font-size: 1.1rem;
-            font-weight: 400;
-        }
-
+        .subtitle { color: var(--warm-brown); font-size: 1.1rem; }
         .sunday-card {
             background: var(--white);
             border-radius: 16px;
@@ -102,26 +53,7 @@
             margin-bottom: 20px;
             box-shadow: 0 4px 24px var(--shadow);
             border: 1px solid rgba(201, 169, 98, 0.15);
-            animation: fadeInUp 0.6s ease-out backwards;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-
-        .sunday-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 32px var(--shadow);
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
         .sunday-header {
             display: flex;
             justify-content: space-between;
@@ -129,88 +61,44 @@
             margin-bottom: 20px;
             padding-bottom: 16px;
             border-bottom: 1px solid var(--soft-gold);
+            flex-wrap: wrap;
+            gap: 10px;
         }
-
         .sunday-date {
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.5rem;
             font-weight: 600;
-            color: var(--deep-brown);
         }
-
         .signup-count {
             background: linear-gradient(135deg, var(--gold) 0%, var(--soft-gold) 100%);
-            color: var(--deep-brown);
             padding: 6px 14px;
             border-radius: 20px;
             font-size: 0.85rem;
             font-weight: 500;
         }
-
-        .signups-list {
-            margin-bottom: 20px;
-        }
-
+        .signups-list { margin-bottom: 20px; }
         .signup-item {
             display: flex;
             align-items: center;
             padding: 12px 0;
             border-bottom: 1px dashed rgba(139, 115, 85, 0.2);
-            animation: slideIn 0.4s ease-out backwards;
+            flex-wrap: wrap;
+            gap: 8px;
         }
-
-        .signup-item:last-child {
-            border-bottom: none;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateX(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .signup-name {
-            font-weight: 500;
-            color: var(--deep-brown);
-            min-width: 120px;
-        }
-
-        .signup-cake {
-            color: var(--warm-brown);
-            flex: 1;
-        }
-
+        .signup-item:last-child { border-bottom: none; }
+        .signup-name { font-weight: 500; min-width: 120px; }
+        .signup-cake { color: var(--warm-brown); flex: 1; }
         .signup-delete {
             background: none;
             border: none;
             color: #c97a7a;
             cursor: pointer;
             padding: 4px 8px;
-            font-size: 0.85rem;
             opacity: 0.6;
-            transition: opacity 0.2s;
         }
-
-        .signup-delete:hover {
-            opacity: 1;
-        }
-
-        .signup-form {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .input-group {
-            flex: 1;
-            min-width: 140px;
-        }
-
+        .signup-delete:hover { opacity: 1; }
+        .signup-form { display: flex; gap: 12px; flex-wrap: wrap; }
+        .input-group { flex: 1; min-width: 140px; }
         .input-group input {
             width: 100%;
             padding: 12px 16px;
@@ -218,22 +106,14 @@
             border-radius: 10px;
             font-family: 'DM Sans', sans-serif;
             font-size: 0.95rem;
-            transition: border-color 0.3s, box-shadow 0.3s;
             background: var(--cream);
         }
-
         .input-group input:focus {
             outline: none;
             border-color: var(--gold);
             box-shadow: 0 0 0 3px rgba(201, 169, 98, 0.2);
         }
-
-        .input-group input::placeholder {
-            color: var(--warm-brown);
-            opacity: 0.6;
-        }
-
-        .btn-signup {
+        .btn {
             background: linear-gradient(135deg, var(--deep-brown) 0%, var(--warm-brown) 100%);
             color: var(--white);
             border: none;
@@ -243,92 +123,13 @@
             font-size: 0.95rem;
             font-weight: 500;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            white-space: nowrap;
         }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(92, 74, 61, 0.3); }
+        .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+        .empty-state { text-align: center; padding: 20px; color: var(--warm-brown); font-style: italic; }
+        .footer { text-align: center; margin-top: 50px; padding-top: 30px; border-top: 1px solid var(--soft-gold); color: var(--warm-brown); }
 
-        .btn-signup:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 16px rgba(92, 74, 61, 0.3);
-        }
-
-        .btn-signup:active {
-            transform: translateY(0);
-        }
-
-        .btn-signup:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 20px;
-            color: var(--warm-brown);
-            font-style: italic;
-        }
-
-        .loading {
-            text-align: center;
-            padding: 60px;
-            color: var(--warm-brown);
-        }
-
-        .loading::after {
-            content: '';
-            display: inline-block;
-            width: 24px;
-            height: 24px;
-            border: 3px solid var(--soft-gold);
-            border-top-color: var(--gold);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-left: 12px;
-            vertical-align: middle;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .config-notice {
-            background: linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%);
-            border: 1px solid #ffc107;
-            border-radius: 12px;
-            padding: 24px;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        .config-notice h3 {
-            font-family: 'Cormorant Garamond', serif;
-            color: #856404;
-            margin-bottom: 12px;
-        }
-
-        .config-notice code {
-            background: rgba(0,0,0,0.1);
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 0.9rem;
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 50px;
-            padding-top: 30px;
-            border-top: 1px solid var(--soft-gold);
-            color: var(--warm-brown);
-            font-size: 0.9rem;
-        }
-
-        .footer a {
-            color: var(--gold);
-            text-decoration: none;
-        }
-
-        /* Login screen */
+        /* Login */
         .login-screen {
             min-height: 100vh;
             display: flex;
@@ -336,75 +137,32 @@
             justify-content: center;
             padding: 20px;
         }
-
         .login-box {
             background: var(--white);
             border-radius: 20px;
             padding: 48px 40px;
             box-shadow: 0 8px 40px var(--shadow);
-            border: 1px solid rgba(201, 169, 98, 0.2);
             text-align: center;
             max-width: 400px;
             width: 100%;
-            animation: fadeInUp 0.6s ease-out;
         }
-
-        .login-box .header-icon {
-            font-size: 56px;
-            margin-bottom: 20px;
-        }
-
-        .login-box h1 {
-            font-size: 2rem;
-            margin-bottom: 8px;
-        }
-
-        .login-box .subtitle {
-            margin-bottom: 32px;
-        }
-
-        .login-form {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
+        .login-box h1 { font-size: 2rem; margin-bottom: 8px; }
+        .login-box .subtitle { margin-bottom: 32px; }
+        .login-form { display: flex; flex-direction: column; gap: 16px; }
         .login-form input {
-            width: 100%;
             padding: 14px 18px;
             border: 2px solid var(--soft-gold);
             border-radius: 12px;
             font-family: 'DM Sans', sans-serif;
             font-size: 1rem;
             text-align: center;
-            transition: border-color 0.3s, box-shadow 0.3s;
             background: var(--cream);
         }
-
         .login-form input:focus {
             outline: none;
             border-color: var(--gold);
-            box-shadow: 0 0 0 3px rgba(201, 169, 98, 0.2);
         }
-
-        .login-form .btn-signup {
-            padding: 14px 24px;
-            font-size: 1rem;
-        }
-
-        .login-error {
-            color: #c97a7a;
-            font-size: 0.9rem;
-            margin-top: 8px;
-            animation: shake 0.4s ease-out;
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-8px); }
-            75% { transform: translateX(8px); }
-        }
-
+        .login-error { color: #c97a7a; margin-top: 12px; }
         .logout-btn {
             position: fixed;
             top: 20px;
@@ -414,63 +172,70 @@
             padding: 8px 16px;
             border-radius: 8px;
             font-family: 'DM Sans', sans-serif;
-            font-size: 0.85rem;
-            color: var(--warm-brown);
             cursor: pointer;
-            transition: all 0.2s;
             z-index: 100;
         }
-
-        .logout-btn:hover {
-            background: var(--cream);
-            border-color: var(--gold);
-        }
+        .hidden { display: none !important; }
 
         @media (max-width: 600px) {
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .signup-form {
-                flex-direction: column;
-            }
-            
-            .input-group {
-                min-width: 100%;
-            }
-            
-            .btn-signup {
-                width: 100%;
-            }
-            
-            .sunday-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
+            h1 { font-size: 2rem; }
+            .signup-form { flex-direction: column; }
+            .input-group { min-width: 100%; }
+            .btn { width: 100%; }
         }
     </style>
 </head>
 <body>
-    <div id="root"></div>
+    <!-- Login Screen -->
+    <div id="login-screen" class="login-screen">
+        <div class="login-box">
+            <span class="header-icon">🔐</span>
+            <h1>Zapisy na ciasto</h1>
+            <p class="subtitle">Podaj hasło, aby kontynuować</p>
+            <form class="login-form" id="login-form">
+                <input type="password" id="password-input" placeholder="Hasło" required>
+                <button type="submit" class="btn">Wejdź</button>
+            </form>
+            <p id="login-error" class="login-error hidden">Nieprawidłowe hasło</p>
+        </div>
+    </div>
 
-    <script type="text/babel">
+    <!-- Main App -->
+    <div id="app" class="container hidden">
+        <button class="logout-btn" id="logout-btn">Wyloguj</button>
+        <header class="header">
+            <span class="header-icon">🍰</span>
+            <h1>Zapisy na ciasto</h1>
+            <p class="subtitle">Wybierz niedzielę i zapisz się z ciastem!</p>
+        </header>
+        <div id="sundays-list"></div>
+        <footer class="footer">
+            <p>Zrobione z ❤️ dla wspólnoty</p>
+        </footer>
+    </div>
+
+    <script type="module">
+        import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+
         // ============================================
-        // KONFIGURACJA - UZUPEŁNIJ PONIŻEJ
+        // KONFIGURACJA
         // ============================================
-        const SUPABASE_URL = 'https://tkxfzyjtopxphqnevcuj.supabase.co';  // np. 'https://xyzcompany.supabase.co'
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRreGZ6eWp0b3B4cGhxbmV2Y3VqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjkxMDcyNzYsImV4cCI6MjA4NDY4MzI3Nn0.F1btQFkcE_6QLc5YjnNTh2yKJ7lq_UD7HfHO6uj0RxM';  // klucz anon/public
+        const SUPABASE_URL = 'https://tkxfzyjtopxphqnevcuj.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRreGZ6eWp0b3B4cGhxbmV2Y3VqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjkxMDcyNzYsImV4cCI6MjA4NDY4MzI3Nn0.F1btQFkcE_6QLc5YjnNTh2yKJ7lq_UD7HfHO6uj0RxM';
         // ============================================
 
-        const isConfigured = SUPABASE_URL !== 'YOUR_SUPABASE_URL' && SUPABASE_ANON_KEY !== 'YOUR_SUPABASE_ANON_KEY';
-        
-        let supabase = null;
-        if (isConfigured) {
-            const { createClient } = window.supabase || window;
-            supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-        }
+        const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        // Funkcja hashująca hasło (SHA-256)
+        // DOM Elements
+        const loginScreen = document.getElementById('login-screen');
+        const app = document.getElementById('app');
+        const loginForm = document.getElementById('login-form');
+        const passwordInput = document.getElementById('password-input');
+        const loginError = document.getElementById('login-error');
+        const logoutBtn = document.getElementById('logout-btn');
+        const sundaysList = document.getElementById('sundays-list');
+
+        // Hash password
         async function hashPassword(password) {
             const encoder = new TextEncoder();
             const data = encoder.encode(password);
@@ -479,9 +244,8 @@
             return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
         }
 
-        // Sprawdź hasło z bazą
+        // Verify password
         async function verifyPassword(password) {
-            if (!supabase) return false;
             const hash = await hashPassword(password);
             const { data, error } = await supabase
                 .from('app_settings')
@@ -493,13 +257,11 @@
             return data.value === hash;
         }
 
-        // Generuj najbliższe niedziele
+        // Get upcoming Sundays
         function getUpcomingSundays(count = 8) {
             const sundays = [];
             const today = new Date();
             let current = new Date(today);
-            
-            // Znajdź najbliższą niedzielę
             const dayOfWeek = current.getDay();
             const daysUntilSunday = dayOfWeek === 0 ? 0 : 7 - dayOfWeek;
             current.setDate(current.getDate() + daysUntilSunday);
@@ -508,303 +270,139 @@
                 sundays.push(new Date(current));
                 current.setDate(current.getDate() + 7);
             }
-            
             return sundays;
         }
 
+        // Format date
         function formatDate(date) {
-            const options = { day: 'numeric', month: 'long', year: 'numeric' };
-            return date.toLocaleDateString('pl-PL', options);
+            return date.toLocaleDateString('pl-PL', { day: 'numeric', month: 'long', year: 'numeric' });
         }
 
         function formatDateKey(date) {
             return date.toISOString().split('T')[0];
         }
 
-        function LoginScreen({ onLogin }) {
-            const [password, setPassword] = React.useState('');
-            const [error, setError] = React.useState(false);
-            const [loading, setLoading] = React.useState(false);
+        // Render sundays
+        async function renderSundays() {
+            const sundays = getUpcomingSundays(8);
+            const { data: signups } = await supabase
+                .from('cake_signups')
+                .select('*')
+                .order('created_at', { ascending: true });
 
-            const handleSubmit = async (e) => {
-                e.preventDefault();
-                setLoading(true);
-                setError(false);
-                
-                const isValid = await verifyPassword(password);
-                
-                if (isValid) {
-                    localStorage.setItem('cake_auth', 'true');
-                    onLogin();
-                } else {
-                    setError(true);
-                    setPassword('');
-                }
-                setLoading(false);
-            };
+            sundaysList.innerHTML = sundays.map(sunday => {
+                const dateKey = formatDateKey(sunday);
+                const daySignups = (signups || []).filter(s => s.sunday_date === dateKey);
+                const countText = daySignups.length === 1 ? 'osoba' : daySignups.length < 5 ? 'osoby' : 'osób';
 
-            return (
-                <div className="login-screen">
-                    <div className="login-box">
-                        <span className="header-icon">🔐</span>
-                        <h1>Zapisy na ciasto</h1>
-                        <p className="subtitle">Podaj hasło, aby kontynuować</p>
-                        
-                        <form className="login-form" onSubmit={handleSubmit}>
-                            <input
-                                type="password"
-                                placeholder="Hasło"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                autoFocus
-                            />
-                            <button 
-                                type="submit" 
-                                className="btn-signup"
-                                disabled={loading || !password}
-                            >
-                                {loading ? 'Sprawdzam...' : 'Wejdź'}
-                            </button>
+                return `
+                    <div class="sunday-card">
+                        <div class="sunday-header">
+                            <div class="sunday-date">☀️ Niedziela, ${formatDate(sunday)}</div>
+                            <div class="signup-count">${daySignups.length} ${countText}</div>
+                        </div>
+                        ${daySignups.length > 0 ? `
+                            <div class="signups-list">
+                                ${daySignups.map(s => `
+                                    <div class="signup-item">
+                                        <span class="signup-name">🍰 ${s.name}</span>
+                                        <span class="signup-cake">${s.cake_description}</span>
+                                        <button class="signup-delete" data-id="${s.id}">✕</button>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        ` : `<div class="empty-state">Brak zapisów — bądź pierwszy! 🎂</div>`}
+                        <form class="signup-form" data-date="${dateKey}">
+                            <div class="input-group">
+                                <input type="text" name="name" placeholder="Twoje imię" maxlength="50" required>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" name="cake" placeholder="Co przyniesiesz?" maxlength="100" required>
+                            </div>
+                            <button type="submit" class="btn">Zapisz się</button>
                         </form>
-                        
-                        {error && (
-                            <p className="login-error">Nieprawidłowe hasło. Spróbuj ponownie.</p>
-                        )}
                     </div>
-                </div>
-            );
-        }
+                `;
+            }).join('');
 
-        function SundayCard({ date, signups, onSignup, onDelete }) {
-            const [name, setName] = React.useState('');
-            const [cake, setCake] = React.useState('');
-            const [loading, setLoading] = React.useState(false);
-
-            const handleSubmit = async (e) => {
-                e.preventDefault();
-                if (!name.trim() || !cake.trim()) return;
-                
-                setLoading(true);
-                await onSignup(date, name.trim(), cake.trim());
-                setName('');
-                setCake('');
-                setLoading(false);
-            };
-
-            const dateKey = formatDateKey(date);
-            const daySignups = signups.filter(s => s.sunday_date === dateKey);
-
-            return (
-                <div className="sunday-card" style={{ animationDelay: `${Math.random() * 0.3}s` }}>
-                    <div className="sunday-header">
-                        <div className="sunday-date">☀️ Niedziela, {formatDate(date)}</div>
-                        <div className="signup-count">
-                            {daySignups.length} {daySignups.length === 1 ? 'osoba' : daySignups.length < 5 ? 'osoby' : 'osób'}
-                        </div>
-                    </div>
-                    
-                    {daySignups.length > 0 ? (
-                        <div className="signups-list">
-                            {daySignups.map((signup, idx) => (
-                                <div 
-                                    key={signup.id} 
-                                    className="signup-item"
-                                    style={{ animationDelay: `${idx * 0.1}s` }}
-                                >
-                                    <span className="signup-name">🍰 {signup.name}</span>
-                                    <span className="signup-cake">{signup.cake_description}</span>
-                                    <button 
-                                        className="signup-delete"
-                                        onClick={() => onDelete(signup.id)}
-                                        title="Usuń wpis"
-                                    >
-                                        ✕
-                                    </button>
-                                </div>
-                            ))}
-                        </div>
-                    ) : (
-                        <div className="empty-state">
-                            Brak zapisów na tę niedzielę — bądź pierwszy! 🎂
-                        </div>
-                    )}
-                    
-                    <form className="signup-form" onSubmit={handleSubmit}>
-                        <div className="input-group">
-                            <input
-                                type="text"
-                                placeholder="Twoje imię"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                                maxLength={50}
-                            />
-                        </div>
-                        <div className="input-group">
-                            <input
-                                type="text"
-                                placeholder="Co przyniesiesz?"
-                                value={cake}
-                                onChange={(e) => setCake(e.target.value)}
-                                maxLength={100}
-                            />
-                        </div>
-                        <button type="submit" className="btn-signup" disabled={loading || !name.trim() || !cake.trim()}>
-                            {loading ? 'Zapisuję...' : 'Zapisz się'}
-                        </button>
-                    </form>
-                </div>
-            );
-        }
-
-        function ConfigNotice() {
-            return (
-                <div className="config-notice">
-                    <h3>⚙️ Konfiguracja wymagana</h3>
-                    <p style={{ marginBottom: '12px' }}>
-                        Aby aplikacja działała, musisz skonfigurować Supabase:
-                    </p>
-                    <ol style={{ textAlign: 'left', maxWidth: '500px', margin: '0 auto', lineHeight: '1.8' }}>
-                        <li>Utwórz projekt na <a href="https://supabase.com" target="_blank" rel="noopener">supabase.com</a></li>
-                        <li>Stwórz tabelę <code>cake_signups</code> (SQL poniżej)</li>
-                        <li>Wklej <code>SUPABASE_URL</code> i <code>SUPABASE_ANON_KEY</code> do kodu</li>
-                    </ol>
-                </div>
-            );
-        }
-
-        function App() {
-            const [isAuthenticated, setIsAuthenticated] = React.useState(() => {
-                return localStorage.getItem('cake_auth') === 'true';
+            // Add event listeners
+            document.querySelectorAll('.signup-form').forEach(form => {
+                form.addEventListener('submit', handleSignup);
             });
-            const [signups, setSignups] = React.useState([]);
-            const [loading, setLoading] = React.useState(true);
-            const sundays = React.useMemo(() => getUpcomingSundays(8), []);
-
-            const handleLogout = () => {
-                localStorage.removeItem('cake_auth');
-                setIsAuthenticated(false);
-            };
-
-            // Pobierz zapisy z Supabase
-            const fetchSignups = async () => {
-                if (!isConfigured) {
-                    setLoading(false);
-                    return;
-                }
-                
-                try {
-                    const { data, error } = await supabase
-                        .from('cake_signups')
-                        .select('*')
-                        .order('created_at', { ascending: true });
-                    
-                    if (error) throw error;
-                    setSignups(data || []);
-                } catch (err) {
-                    console.error('Błąd pobierania:', err);
-                }
-                setLoading(false);
-            };
-
-            React.useEffect(() => {
-                fetchSignups();
-                
-                // Realtime subscription
-                if (isConfigured) {
-                    const channel = supabase
-                        .channel('cake_signups_changes')
-                        .on('postgres_changes', 
-                            { event: '*', schema: 'public', table: 'cake_signups' }, 
-                            () => fetchSignups()
-                        )
-                        .subscribe();
-                    
-                    return () => supabase.removeChannel(channel);
-                }
-            }, []);
-
-            const handleSignup = async (date, name, cakeDescription) => {
-                if (!isConfigured) return;
-                
-                try {
-                    const { error } = await supabase
-                        .from('cake_signups')
-                        .insert([{
-                            sunday_date: formatDateKey(date),
-                            name: name,
-                            cake_description: cakeDescription
-                        }]);
-                    
-                    if (error) throw error;
-                    await fetchSignups();
-                } catch (err) {
-                    console.error('Błąd zapisu:', err);
-                    alert('Nie udało się zapisać. Spróbuj ponownie.');
-                }
-            };
-
-            const handleDelete = async (id) => {
-                if (!isConfigured) return;
-                if (!confirm('Czy na pewno chcesz usunąć ten wpis?')) return;
-                
-                try {
-                    const { error } = await supabase
-                        .from('cake_signups')
-                        .delete()
-                        .eq('id', id);
-                    
-                    if (error) throw error;
-                    await fetchSignups();
-                } catch (err) {
-                    console.error('Błąd usuwania:', err);
-                    alert('Nie udało się usunąć. Spróbuj ponownie.');
-                }
-            };
-
-            if (!isAuthenticated) {
-                return <LoginScreen onLogin={() => setIsAuthenticated(true)} />;
-            }
-
-            if (loading) {
-                return (
-                    <div className="container">
-                        <div className="loading">Ładowanie zapisów</div>
-                    </div>
-                );
-            }
-
-            return (
-                <div className="container">
-                    <button className="logout-btn" onClick={handleLogout}>
-                        Wyloguj
-                    </button>
-
-                    <header className="header">
-                        <span className="header-icon">🍰</span>
-                        <h1>Zapisy na ciasto</h1>
-                        <p className="subtitle">Wybierz niedzielę i zapisz się z ciastem!</p>
-                    </header>
-
-                    {!isConfigured && <ConfigNotice />}
-
-                    {sundays.map((sunday, idx) => (
-                        <SundayCard
-                            key={formatDateKey(sunday)}
-                            date={sunday}
-                            signups={signups}
-                            onSignup={handleSignup}
-                            onDelete={handleDelete}
-                        />
-                    ))}
-
-                    <footer className="footer">
-                        <p>Zrobione z ❤️ dla wspólnoty</p>
-                    </footer>
-                </div>
-            );
+            document.querySelectorAll('.signup-delete').forEach(btn => {
+                btn.addEventListener('click', handleDelete);
+            });
         }
 
-        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+        // Handle signup
+        async function handleSignup(e) {
+            e.preventDefault();
+            const form = e.target;
+            const dateKey = form.dataset.date;
+            const name = form.name.value.trim();
+            const cake = form.cake.value.trim();
+
+            if (!name || !cake) return;
+
+            await supabase.from('cake_signups').insert([{
+                sunday_date: dateKey,
+                name: name,
+                cake_description: cake
+            }]);
+
+            form.reset();
+            renderSundays();
+        }
+
+        // Handle delete
+        async function handleDelete(e) {
+            if (!confirm('Usunąć wpis?')) return;
+            const id = e.target.dataset.id;
+            await supabase.from('cake_signups').delete().eq('id', id);
+            renderSundays();
+        }
+
+        // Login
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            loginError.classList.add('hidden');
+            
+            const isValid = await verifyPassword(passwordInput.value);
+            
+            if (isValid) {
+                localStorage.setItem('cake_auth', 'true');
+                showApp();
+            } else {
+                loginError.classList.remove('hidden');
+                passwordInput.value = '';
+            }
+        });
+
+        // Logout
+        logoutBtn.addEventListener('click', () => {
+            localStorage.removeItem('cake_auth');
+            loginScreen.classList.remove('hidden');
+            app.classList.add('hidden');
+        });
+
+        // Show app
+        function showApp() {
+            loginScreen.classList.add('hidden');
+            app.classList.remove('hidden');
+            renderSundays();
+        }
+
+        // Init
+        if (localStorage.getItem('cake_auth') === 'true') {
+            showApp();
+        }
+
+        // Realtime
+        supabase.channel('changes')
+            .on('postgres_changes', { event: '*', schema: 'public', table: 'cake_signups' }, () => {
+                renderSundays();
+            })
+            .subscribe();
     </script>
 </body>
 </html>
